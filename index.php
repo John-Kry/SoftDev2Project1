@@ -1,6 +1,9 @@
 <?php
+session_start();
 if (isset($_POST["Submit"])){
-     $_SESSION['post_data'] = $_POST;
+     $_SESSION['fullName'] = $_POST['fullName'];
+     $_SESSION['CWID'] = $_POST['CWID'];
+     $_SESSION['Residency'] = $_POST['Residency'];
            if ($_POST["Residency"]=="noSelection"){
                if (($_POST["Year"]=="Frosh")&&((isset($_POST["Townhouse"]))||(isset($_POST["Kitchen"])))){
                echo ("There is no configuration that exists for these choices.<br>");
@@ -51,7 +54,7 @@ if (isset($_POST["Submit"])){
                     <option value="NewFulton">New Fulton</option>
                     <option value="Talmadge">Talmadge</option>
                     </select><br><br>
-                       <Form Name ="toConfirmPage" Method ="POST" ACTION = "index.php">
+                    <Form Name ="toConfirmPage" Method ="POST" ACTION = "index.php">
                     <INPUT TYPE = "Submit" Name = "Submit2" VALUE = "Submit">
                     </Form>');
                }
@@ -108,8 +111,11 @@ if (isset($_POST["Submit"])){
     }
 }
 else if (isset($_POST["Submit2"])){
-    $_POST=$_SESSION["post_data"];
-    $_POST["fullName"];
+    echo ('Name: '. $_SESSION["fullName"].'<br>');
+    echo ('CWID: '. $_SESSION["CWID"]. '<br>');
+    echo ('Residential Life Selection: '. $_SESSION["Residency"]. '<br>');
+    //This button currently does nothing...
+    echo ('<button>Confirm</button>');
 }
 else{
     echo ('<html>
